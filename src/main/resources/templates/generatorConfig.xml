@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <classPathEntry location="C:\work\mybatis\mysql-connector-java-5.1.32.jar" />
+
+    <!-- http://blog.csdn.net/isea533/article/details/42102297 -->
+    <!--  useGeneratedKeys="true" keyProperty="id" -->
+
+    <context id="context1" defaultModelType="flat">
+        <property name="javaFileEncoding" value="utf-8" />
+       <!-- <commentGenerator type="com.wyy.todolist.common.mybatis.generator.MyCommentGenerator" />-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/todolist" userId="root" password="123456" />
+
+        <!-- Java Entity  /Users/liujiejian/git/activity-service/ymm-activity-service-biz/src/main/java/com/ymm/activity/module/award/mapper/AwardInfoEntityMapper.java-->
+        <javaModelGenerator targetPackage="com.wyy.todolist.model" targetProject="C:\work\workspace\idea\todolist\src\main\java" >
+            <property name="enableSubPackages" value="true" />
+        </javaModelGenerator>
+        <!-- XML Mapper -->
+        <sqlMapGenerator targetPackage="src/main/resources/config/mybatis/mapper" targetProject="C:\work\workspace\idea\todolist" >
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!-- Java Mapper -->
+        <javaClientGenerator targetPackage="com.wyy.todolist.mapper" targetProject="C:\work\workspace\idea\todolist\src\main\java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        <!-- Java Mapper -->
+        <!-- <javaClientGenerator targetPackage="com.ymm.activity.module.share.mapper" targetProject="activity-service-biz" type="XMLMAPPER" /> -->
+
+        <table schema="todolist" tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+
+
+
+        <!--         <table schema="operationactivitydb" tableName="share_docs" domainObjectName="ShareDocsEntity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"> -->
+        <!--             <columnOverride column="is_valid" javaType="java.lang.Integer" jdbcType="INTEGER" /> -->
+        <!--         </table> -->
+        <!--         <table schema="operationactivitydb" tableName="share_result_record" domainObjectName="ShareResultRecordEntity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"> -->
+        <!--             <columnOverride column="share_result" javaType="java.lang.Integer" jdbcType="INTEGER" /> -->
+        <!--             <columnOverride column="channel" javaType="java.lang.Integer" jdbcType="INTEGER" /> -->
+        <!--             <columnOverride column="is_valid" javaType="java.lang.Integer" jdbcType="INTEGER" /> -->
+        <!--         </table> -->
+        <!--         <table schema="operationactivitydb" tableName="share_scene" domainObjectName="ShareSceneEntity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"> -->
+        <!--             <columnOverride column="is_valid" javaType="java.lang.Integer" jdbcType="INTEGER" /> -->
+        <!--         </table> -->
+
+        <!--         <table schema="operationactivitydb" tableName="share_scene_trigger" domainObjectName="ShareSceneTriggerEntity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"> -->
+        <!--             <columnOverride column="share_award_trigger_type" javaType="java.lang.Integer" jdbcType="INTEGER" /> -->
+        <!--             <columnOverride column="is_valid" javaType="java.lang.Integer" jdbcType="INTEGER" /> -->
+        <!--         </table> -->
+        <!--         <table schema="operationactivitydb" tableName="share_trigger_result_record" domainObjectName="ShareTriggerResultRecordEntity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"> -->
+        <!--             <columnOverride column="share_trigger_result" javaType="java.lang.Integer" jdbcType="INTEGER" /> -->
+        <!--             <columnOverride column="is_valid" javaType="java.lang.Integer" jdbcType="INTEGER" /> -->
+        <!--         </table> -->
+
+    </context>
+</generatorConfiguration>
