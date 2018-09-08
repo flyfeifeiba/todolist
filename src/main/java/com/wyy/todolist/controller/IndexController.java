@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     @RequestMapping("/")
     public String index() {
-        return "forward:static/html/index.html";
+        return "index";
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "user/login";
     }
 }

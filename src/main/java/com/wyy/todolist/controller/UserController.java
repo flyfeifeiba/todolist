@@ -1,18 +1,25 @@
 package com.wyy.todolist.controller;
 
+import com.wyy.todolist.common.constant.SessionConstant;
+import com.wyy.todolist.domain.enums.LoginStatus;
+import com.wyy.todolist.domain.result.CommonResult;
 import com.wyy.todolist.model.User;
 import com.wyy.todolist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
+
 
 @RestController
-@EnableAutoConfiguration
-public class UserController {
+@RequestMapping("/user")
+public class UserController extends BaseController{
     @Autowired
     private UserService userService;
 
@@ -21,9 +28,19 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @RequestMapping("/getAllUser")
-    public String getAllUser() {
-        return "index";
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public CommonResult login(User user, HttpServletResponse response) {
+        CommonResult loginResult = userService.validateUser(user);
+        //登陆成功
+        if (loginResult.getResultCode() != LoginStatus.SUCCESS.getCode()) {
+            return  loginResult;
+        }
+        Cookie cookie = new Cookie(SessionConstant.USER_KEY, user.getId().toString());
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        getSession().setAttribute(SessionConstant.USER_KEY, loginResult.getData());
+        return loginResult;
+
     }
 
 }
