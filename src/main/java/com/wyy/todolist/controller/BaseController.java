@@ -27,10 +27,10 @@ public class BaseController {
     }
 
     protected long getUserId() {
-        Long id=0l;
-        User user=getUser();
-        if(user!=null){
-            id=user.getId();
+        Long id = 0l;
+        User user = getUser();
+        if(user != null){
+            id = user.getId();
         }
         return id;
     }
