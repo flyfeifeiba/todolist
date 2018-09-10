@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public CommonResult validateUser(User user) {
-        CommonResult result = new CommonResult();
+        CommonResult result = CommonResult.CreateDefaultResult();
         if (user == null) {
             result.setResultCode(LoginStatus.USER_NULL.getCode());
             result.setResultMsg(LoginStatus.USER_NULL.getMsg());
