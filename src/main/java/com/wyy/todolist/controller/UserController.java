@@ -8,6 +8,7 @@ import com.wyy.todolist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,7 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public CommonResult login(User user, HttpServletResponse response) {
+    public CommonResult login(@RequestBody User user, HttpServletResponse response) {
         CommonResult loginResult = userService.validateUser(user);
         //登陆成功
         if (loginResult.getResultCode() != LoginStatus.SUCCESS.getCode()) {
