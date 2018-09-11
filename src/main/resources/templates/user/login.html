@@ -8,44 +8,46 @@
     <script src="../../static/js/jQuery/jquery.js"></script>
 </head>
 <body>
-    <div class="box">
-        <h2>登录</h2>
 
-        <div class="input_box">
-            <input id="username" class="sign" type="text" placeholder="请输入用户名">
-        </div>
-        <div class="input_box">
-            <input id="password" class="sign" type="password" placeholder="请输入密码">
-        </div>
 
-        <div id="error_box"><br>
-        </div>
-        <div class="input_box">
-            <input type="submit" name="commit" value="登录" class="sign-in-button" data-disable-with="登录" />
+<div class="box">
+    <h2>登录</h2>
 
-            </div>
-
-        </div>
+    <div class="input_box">
+        <input id="username" class="sign" type="text" placeholder="请输入用户名">
     </div>
-    <script>
-        $(".sign-in-button").click(function () {
-            var username = $("#username").val();
-            var password = $("#password").val();
-            alert(username)
-            $.ajax({
-                url: "/user/login/",
-                type: "POST",
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify({
-                        "username":username,
-                        "password":password
-                }),
-                success: function (result) {
-                    alert("success");
-                }
-            })
+    <div class="input_box">
+        <input id="password" class="sign" type="password" placeholder="请输入密码">
+    </div>
+
+    <div id="error_box"><br>
+    </div>
+    <div class="input_box">
+        <input type="submit" name="commit" value="登录" class="sign-in-button" data-disable-with="登录" />
+
+    </div>
+
+</div>
+</div>
+<script>
+    $(".sign-in-button").click(function () {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        alert(username)
+        $.ajax({
+            url: "/user/login/",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({
+                "username":username,
+                "password":password
+            }),
+            success: function (result) {
+                alert("success");
+            }
         })
-    </script>
+    })
+</script>
 </body>
 </html>
