@@ -5,7 +5,7 @@
     <title>Title</title>
 
     <link  rel="stylesheet" type="text/css" href="../static/css/nino.css">
-    <script src="../static/js/aiba.js"></script>
+    <script src="../../static/js/jQuery/jquery.js"></script>
 </head>
 <body>
     <div class="box">
@@ -21,11 +21,31 @@
         <div id="error_box"><br>
         </div>
         <div class="input_box">
-            <input type="submit" name="commit" value="登录" class="sign-in-button" data-disable-with="登录" onclick="myLogin()">
+            <input type="submit" name="commit" value="登录" class="sign-in-button" data-disable-with="登录" />
 
             </div>
 
         </div>
     </div>
+    <script>
+        $(".sign-in-button").click(function () {
+            var username = $("#username").val();
+            var password = $("#password").val();
+            alert(username)
+            $.ajax({
+                url: "/user/login/",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify({
+                        "username":username,
+                        "password":password
+                }),
+                success: function (result) {
+                    alert("success");
+                }
+            })
+        })
+    </script>
 </body>
 </html>
