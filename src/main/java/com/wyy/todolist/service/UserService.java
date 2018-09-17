@@ -27,6 +27,8 @@ public interface UserService {
 
     public List<User> getAllUser();
 
+    public CommonResult register(User user);
+
 
 
 }

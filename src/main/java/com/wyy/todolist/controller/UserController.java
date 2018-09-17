@@ -44,4 +44,10 @@ public class UserController extends BaseController{
 
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public CommonResult register(@RequestBody User user, HttpServletResponse response) {
+        return null;
+
+    }
+
 }

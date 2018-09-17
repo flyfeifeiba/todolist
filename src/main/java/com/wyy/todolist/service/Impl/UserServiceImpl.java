@@ -1,6 +1,8 @@
 package com.wyy.todolist.service.Impl;
 
+import com.wyy.todolist.dao.UserDao;
 import com.wyy.todolist.domain.enums.LoginStatus;
+import com.wyy.todolist.domain.enums.RegisterStatus;
 import com.wyy.todolist.domain.result.CommonResult;
 import com.wyy.todolist.mapper.BaseDao;
 import com.wyy.todolist.mapper.UserMapper;
@@ -17,39 +19,35 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public CommonResult validateUser(User user) {
-        CommonResult result = CommonResult.CreateDefaultResult();
+        CommonResult result = null;
         if (user == null) {
-            result.setResultCode(LoginStatus.USER_NULL.getCode());
-            result.setResultMsg(LoginStatus.USER_NULL.getMsg());
+            result = new CommonResult(LoginStatus.USER_NULL.getCode(), LoginStatus.USER_NULL.getMsg());
             return result;
         }
         if (user.getUsername() == null) {
-            result.setResultCode(LoginStatus.USERNAME_NULL.getCode());
-            result.setResultMsg(LoginStatus.USERNAME_NULL.getMsg());
+            result = new CommonResult(LoginStatus.USERNAME_NULL.getCode(), LoginStatus.USERNAME_NULL.getMsg());
             return result;
         }
         if (user.getPassword() == null) {
-            result.setResultCode(LoginStatus.PASSWORD_NULL.getCode());
-            result.setResultMsg(LoginStatus.PASSWORD_NULL.getMsg());
+            result = new CommonResult(LoginStatus.PASSWORD_NULL.getCode(), LoginStatus.PASSWORD_NULL.getMsg());
             return result;
         }
         User loginUser = userMapper.selectByUsername(user.getUsername());
         if (loginUser == null) {
-            result.setResultCode(LoginStatus.USERNAME_ERROR.getCode());
-            result.setResultMsg(LoginStatus.USERNAME_ERROR.getMsg());
+            result = new CommonResult(LoginStatus.USERNAME_ERROR.getCode(), LoginStatus.USERNAME_ERROR.getMsg());
             return result;
         }
         if (user.getPassword() != loginUser.getPassword()) {
-            result.setResultCode(LoginStatus.PASSWORD_ERROR.getCode());
-            result.setResultMsg(LoginStatus.PASSWORD_ERROR.getMsg());
+            result = new CommonResult(LoginStatus.PASSWORD_ERROR.getCode(), LoginStatus.PASSWORD_ERROR.getMsg());
             return result;
         }
 
-        result.setResultCode(LoginStatus.SUCCESS.getCode());
-        result.setResultMsg(LoginStatus.SUCCESS.getMsg());
+        result = new CommonResult(LoginStatus.SUCCESS.getCode(), LoginStatus.SUCCESS.getMsg());
         result.setData(loginUser);
         return  result;
 
@@ -72,6 +70,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUser() {
         return null;
+    }
+
+    @Override
+    public CommonResult register(User user) {
+        CommonResult result = null;
+        //判断用户是否已经存在
+        if(userDao.judgeUserExist(user.getUsername())) {
+            result = new CommonResult(RegisterStatus.USERNAME_EXIST.getCode(),
+                    RegisterStatus.USERNAME_EXIST.getMsg());
+            return result;
+        }
+
+        return result;
     }
 
 
