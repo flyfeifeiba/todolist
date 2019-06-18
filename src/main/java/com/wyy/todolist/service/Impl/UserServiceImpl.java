@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
             result = new CommonResult(LoginStatus.USERNAME_ERROR.getCode(), LoginStatus.USERNAME_ERROR.getMsg());
             return result;
         }
-        if (user.getPassword() != loginUser.getPassword()) {
+        if (!user.getPassword().equals(loginUser.getPassword())) {
             result = new CommonResult(LoginStatus.PASSWORD_ERROR.getCode(), LoginStatus.PASSWORD_ERROR.getMsg());
             return result;
         }
